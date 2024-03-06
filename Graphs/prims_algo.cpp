@@ -2,6 +2,11 @@
 // the tree with the least overall sum of weights of the edges is the MST
 //prims help us find this weight and the edges used to get the weight
 
+
+//time: O(E * logE), E is the no of edges
+//space: O(E) + O(V)    
+    //O(E) due to pq, and O(V) due to vis array and O(V-1) due to mst vector
+    
 #include <bits/stdc++.h>
 using namespace std;
 

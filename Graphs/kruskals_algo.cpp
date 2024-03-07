@@ -1,5 +1,6 @@
 //first sort the edges based on their edge weights
-//starting from any node do a bfs and for nodes that do not belong to the same component
+//starting from node with least weight do a bfs and for nodes that do not belong 
+//to the same component
 //make their parent same and add the edges weight to total weight
 //also add the edge to mst vector
 
@@ -60,7 +61,7 @@ public:
     }
 };
 
-pair<int, vector<pair<int,int>>> kruskals(int src, const vector<vector<pair<int,int>>> &adj){
+pair<int, vector<pair<int,int>>> kruskals(const vector<vector<pair<int,int>>> &adj){
     int n = adj.size();
     vector<pair<int, pair<int,int>>> edges;
     for(int i=0; i<n; i++){
@@ -98,6 +99,6 @@ pair<int, vector<pair<int,int>>> kruskals(int src, const vector<vector<pair<int,
 int main(){
     vector<vector<pair<int,int>>> adj;
     int src; //specify the source, can be any though will give same ans
-    auto [totalSum, mst] = kruskals(src, adj);
+    auto [totalSum, mst] = kruskals(adj);
     return 0;
 }

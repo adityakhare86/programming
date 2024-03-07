@@ -16,7 +16,7 @@ public:
         iota(parent.begin(), parent.end(), 0);
     }
     int findUPar(int node){ //find ultimate parent
-        if(parent[node] != node)
+        if(parent[node] == node)
             return node;
         return parent[node] = findUPar(parent[node]); //path compression
     }

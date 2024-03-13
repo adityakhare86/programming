@@ -1,5 +1,5 @@
 /* articulation point -> node in a graph that breaks the component
-into one or more components 
+into two or more components 
 
 we follow the same approach as tarjan's algo difference being we don't
 update the low when we find "visited nodes" or parent node

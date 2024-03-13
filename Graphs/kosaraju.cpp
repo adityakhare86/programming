@@ -1,4 +1,24 @@
+/*
+we use kosaraju to find strongly connected components (SCCs)
 
+let there are two nodes in SCC, A and B, then A must be able to reach B
+and B must be able to reach A
+
+A single node is also a SCC
+
+To go from one SCC to another there is a node, which if reversed we find
+that we cannot reach the another SCC
+
+Following the same idea we reverse the nodes of the entire graph and keep
+a track of nodes that we have traversed
+
+we keep track before while traversing we traverse the nodes of scc first then 
+another and so on
+
+so after reversing the nodes we will only be able to traverse the nodes of one
+component at a time
+
+*/
 
 #include <bits/stdc++.h>
 using namespace std;

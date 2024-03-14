@@ -16,7 +16,8 @@ we keep track before while traversing we traverse the nodes of scc first then
 another and so on
 
 so after reversing the nodes we will only be able to traverse the nodes of one
-component at a time
+component at a time and then we move onto to the next nodes that haven't been 
+marked yet which are of another component
 
 */
 

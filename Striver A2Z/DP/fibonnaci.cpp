@@ -7,7 +7,7 @@ Space: O(n) due recursion stack space and dp array
 #include <bits/stdc++.h>
 using namespace std;
 
-class Memoized_fib{
+class memoizedFib{
 private:
     int find(int n, vector<int> &dp){
         if(n <= 1) return n;
@@ -21,11 +21,38 @@ public:
     }
 };
 
+class tabulatedFib{
+public:
+    int fibonacci(int n){
+        vector<int> dp(n+1);
+        dp[0] = 0, dp[1] = 1;
+        for(int i=2; i<=n; i++){
+            dp[i] = dp[i-1] + dp[i-2];
+        }
+        return dp[n];
+    }
+};
+
+class spaceOptFib{
+public:
+    int fibonacci(int n){
+        if(n<=1) return n;
+        int prev1 = 0, prev2 = 1;
+        int ans;
+        for(int i=2; i<=n; i++){
+            ans = prev1 + prev2;
+            prev1 = prev2;
+            prev2 = ans;
+        }
+        return ans;
+    }
+};
+
 int main(){
     int n = 7;
 
-    Memoized_fib obj;
-    int ans = obj.fibonnaci(n);
+    tabulatedFib obj;
+    int ans = obj.fibonacci(n);
     cout<<ans<<'\n';
     return 0;
 }

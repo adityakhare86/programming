@@ -1,6 +1,9 @@
 #include <bits/stdc++.h>
 using namespace std;
 
+
+//Time : O(2^n) 
+//Space: O(2^n) for the recursion stack space
 class recursive{
 private:
     int find(int n){
@@ -13,6 +16,8 @@ public:
     }
 };
 
+//Time : O(n) 
+//Space: O(n) due to dp vector and recursion stack space
 class memoization{
 private:
     int find(int n, vector<int> &dp){
@@ -27,6 +32,8 @@ public:
     }
 };
 
+//Time: O(n)
+//Space: O(n) due to dp vector
 class tabulation{
 public:
     int climbingStairs(int n){
@@ -42,6 +49,8 @@ public:
     }
 };
 
+//Time : O(n)
+//Space : O(1)
 class spaceOptimized{
 public:
     int climbingStairs(int n){

@@ -27,8 +27,8 @@ There three conditions on how we query the seg tree:
 3) The query overlaps with the current query -> further query the seg tree until we find (1) or (2)
 */
 int query(int idx, int low, int high, int l, int r){
-    if(l>=low && high<=r)return seg[idx];
     if(low > high)return INT_MIN;
+    if(l==low && high==r)return seg[idx];
 
     int mid = (low + high)/2;
     int left = query(2*idx+1, low, mid, l, r);

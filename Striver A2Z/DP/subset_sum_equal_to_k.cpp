@@ -14,16 +14,17 @@ private:
         return take||notTake;
     }
 
-    bool memoized_find(int idx, int sum, int k, vector<int> &dp, const vector<int> &arr){
+    bool memoized_find(int idx, int sum, int k, vector<vector<int>> &dp, const vector<int> &arr){
         int n = arr.size();
         if(sum == k)return true;
-        if(idx >= n)return false;
-        if(dp[idx] != -1)return dp[idx];
+        if(idx >= n || sum>k)return false;
+        if(dp[idx][sum] != -1)return dp[idx][sum];
 
-        bool take = memoized_find(idx+1, sum + arr[idx], k, dp, arr);
+        bool take = false;
+        if(arr[idx] + sum <= k) take = memoized_find(idx+1, sum + arr[idx], k, dp, arr);
         bool notTake = memoized_find(idx+1, sum, k, dp, arr);
 
-        return dp[idx] = take||notTake;
+        return dp[idx][sum] = take||notTake;
     }
 public:
     int recursion(int n, int k, vector<int> &arr){
@@ -31,7 +32,60 @@ public:
     }
 
     int memoization(int n, int k, vector<int> &arr){
-        vector<int> dp (n, -1);
+        vector<vector<int>> dp (n, vector<int> (k+1, -1));
         return memoized_find(0, 0, k, dp, arr);
+    }
+
+    int tabulation(int n, int k, vector<int> &arr){
+        //dp array marks if we can consider the element for our subset
+        vector<vector<bool>> dp (n, vector<bool> (k+1, false));
+
+        
+        //target 0 can be achieved by taking none of the elements
+        for(int i=0; i<n; i++){
+            dp[i][0] = true;
+        }
+
+        if(arr[0] <= k){
+            dp[0][arr[0]] = true;
+        }
+
+        for(int idx=1; idx<n; idx++){
+            for(int target=1; target<k+1; target++){
+                bool notTaken = dp[idx-1][target];
+                bool taken = false;
+                if(arr[idx] <= target){
+                    taken = dp[idx-1][target-arr[idx]];
+                }
+
+                dp[idx][target] = notTaken || taken;
+            }
+        }
+
+        return dp[n-1][k];
+    }
+
+    int spaceOpt(int n, int k, vector<int> &arr){
+        vector<bool> dp1 (k+1, false), dp2 (k+1, false);
+        dp1[0] = true, dp2[0] = true;
+        if(arr[0] <= k)
+            dp1[arr[0]] = true;
+
+        for(int idx = 1; idx<n; idx++){
+            for(int target = 1; target<k+1; target++){
+                bool notTaken = dp1[target];
+                bool taken = false;
+                if(arr[idx] <= target){
+                    taken = dp1[target - arr[idx]];
+                }
+
+                dp2[target] = taken || notTaken;
+            }
+            dp1 = dp2;
+            dp2.assign(k+1, false);
+            dp2[0] = true;
+        }
+
+        return dp1[k];
     }
 };

@@ -28,15 +28,21 @@ private:
     }
 public:
     bool recursion(int n, int k, vector<int> &arr){
+        if(k%2)return false;
+        k /= 2;
         return recursive_find(0, 0, k, arr);
     }
 
     bool memoization(int n, int k, vector<int> &arr){
+        if(k%2)return false;
+        k /= 2;
         vector<vector<int>> dp (n, vector<int> (k+1, -1));
         return memoized_find(0, 0, k, dp, arr);
     }
 
     bool tabulation(int n, int k, vector<int> &arr){
+        if(k%2)return false;
+        k /= 2;
         //dp array marks if we can consider the element for our subset
         vector<vector<bool>> dp (n, vector<bool> (k+1, false));
 
@@ -66,6 +72,8 @@ public:
     }
 
     bool spaceOpt(int n, int k, vector<int> &arr){
+        if(k%2)return false;
+        k /= 2;
         vector<bool> dp1 (k+1, false), dp2 (k+1, false);
         dp1[0] = true, dp2[0] = true;
         if(arr[0] <= k)

@@ -64,7 +64,6 @@ public:
                 int notTake = 0 + dp[length];
                 int take = INT_MIN;
                 if(idx <= length)take = price[idx-1] + dp[length-idx];
-
                 dp[length] = max(take, notTake);
             }
         }

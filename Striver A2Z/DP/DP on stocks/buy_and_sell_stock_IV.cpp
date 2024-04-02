@@ -1,7 +1,7 @@
 #include <bits/stdc++.h>
 using namespace std;
 
-class StocksIII{
+class StocksIV{
 private:
     int recursive_find(int idx, int txns, const vector<int> &prices){
         int n = prices.size();
@@ -35,22 +35,19 @@ private:
 
         return dp[txns][idx] = temp_ans;
     }
-
 public:
-    int recursion(vector<int> &prices){
-        return recursive_find(0, 2, prices);
+    int recursion(int k, vector<int> &prices){
+        return recursive_find(0, k, prices);
     }
 
-    int memoization(vector<int> &prices){
+    int memoization(int k, vector<int> &prices){
         int n = prices.size();
-        vector<vector<int>> dp (3, vector<int> (n, -1)) ;
-        return memoized_find(0, 2, prices, dp);
+        vector<vector<int>> dp (k+1, vector<int> (n, -1)) ;
+        return memoized_find(0, k, prices, dp);
     }
     
-    int tabulation(vector<int> &prices){
+    int tabulation(int k, vector<int> &prices){
         int n = prices.size();
-        int k = 2; 
-
         vector<vector<int>> dp(k + 1, vector<int>(n, 0));
 
         //maxDiff is the total profit after buying

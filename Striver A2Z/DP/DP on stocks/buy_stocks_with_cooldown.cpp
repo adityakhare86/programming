@@ -41,16 +41,14 @@ public:
 
     int tabulation(vector<int> &prices){
         int n = prices.size();
-        vector<int> dp(n+1, 0);
-        if(n>=2){
-            dp[2] = prices[2] > prices[1]? prices[2] - prices[1] : 0;
-        }
+        vector<vector<int>> dp(n+2, vector<int> (n+2, 0));
 
-        for(int i=1; i<=n; i++){
-            if(prices[i] > prices[i-1]){
-                dp[i] = (prices[i] - prices[i-1])
-
+        for(int i=n-1; i>=0; i--){
+            for(int j=i+1; j<n; j++){
+                dp[i][j] = max(dp[i+1][j], prices[j] - prices[i] + dp[j+2][j]);
             }
         }
+
+        return dp[0][0];
     }
 };
